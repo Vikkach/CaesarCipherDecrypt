@@ -17,8 +17,13 @@ public class CaesarCipheDecrypt {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(oneKeyDecrypt("iQOS - Analyze 1.6 and 1.7 Charger SCP specs Changes in doc v1.7 are only for System Status command which is not implemented on iOS/Android side, no changes required. In doc v1.6 added flag to Detailed System Error command (for charger), should be implemented in iOS/Android side."));
-        System.out.println(twoKeyDecrypt("Just a test string with lots of eeeeeeeeeeeeeeeees"));// TODO code application logic here
+        String str = "ABDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (int i = 0; i <= str.length() - 1; i++){
+            int newE = 4 + i;
+            System.out.println(oneKeyDecrypt(str.substring(i) + str.substring(newE,newE) + str.substring(newE,newE) + str.substring(0, i)));
+        }
+
+      //  System.out.println(twoKeyDecrypt("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu"));// TODO code application logic here
     }
 
     
@@ -52,20 +57,28 @@ public class CaesarCipheDecrypt {
         int indexE = Character.getNumericValue('E');
         int indexMaxChar = Character.getNumericValue(maxChar);
         int key = (indexE - indexMaxChar);
+        System.out.println(key);
         
         for (int i = 0; i < input.length(); i++){
             char newChar = 0;
             char fromInput = input.charAt(i);
             int oldCharIndex = Character.getNumericValue(fromInput);
             int newCharIndex = oldCharIndex + key;
-            if (newCharIndex > 10 && newCharIndex < 36){
+            
+            if (newCharIndex < 10 && Character.isLetter(fromInput)){
+                newCharIndex = 36 + (oldCharIndex - 10) + key;
+            }
+           if (newCharIndex > 9 && newCharIndex < 36){
                 if (Character.isLowerCase(fromInput)){
                     newChar = Character.forDigit(newCharIndex, 36);
                 } if (Character.isUpperCase(fromInput)){
                     newChar = Character.forDigit(newCharIndex, 36);
                     newChar = Character.toUpperCase(newChar);
                 }
-            } else {
+            } 
+            
+            
+            else {
                 newChar = Character.valueOf(fromInput);
              }
            
