@@ -17,7 +17,7 @@ public class CaesarCipheDecrypt {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(decrypt("Kh ghwhuplqhg wr gurs klv olwljdwlrq zlwk wkh prqdvwub, dqg uholqjxlvk klv fodlpv wr wkh zrrg-fxwlqj dqg ilvkhub ulkjwv dw rqfh. Kh zdv wkh pruh uhdgb wr gr wklv ehfxdvh wkh uljkwv kdg ehfrp pxfk ohvv ydoxdeoh, dqg kh kdg lqghhg wkh ydjxhvw lghd zkhuh wkh zrrg dqg ulyhu lq txhgwlrq zhuh."));// TODO code application logic here
+        System.out.println(decrypt("iQOS - Analyze 1.6 and 1.7 Charger SCP specs Changes in doc v1.7 are only for System Status command which is not implemented on iOS/Android side, no changes required. In doc v1.6 added flag to Detailed System Error command (for charger), should be implemented in iOS/Android side."));// TODO code application logic here
     }
 
     
@@ -58,13 +58,15 @@ public class CaesarCipheDecrypt {
             int oldCharIndex = Character.getNumericValue(fromInput);
             int newCharIndex = oldCharIndex + key;
             if (newCharIndex > 10 && newCharIndex < 36){
-               newChar = Character.forDigit(newCharIndex, 36); 
+                if (Character.isLowerCase(fromInput)){
+                    newChar = Character.forDigit(newCharIndex, 36);
+                } if (Character.isUpperCase(fromInput)){
+                    newChar = Character.forDigit(newCharIndex, 36);
+                    newChar = Character.toUpperCase(newChar);
+                }
             } else {
-                 newChar = Character.forDigit(oldCharIndex, 36);
+                newChar = Character.valueOf(fromInput);
              }
-            //if ((newCharIndex < 0) || (newCharIndex > 35)) {
-              //  throw new IllegalArgumentException();
-            //}
            
             replasedString.setCharAt(i, newChar);
         }
