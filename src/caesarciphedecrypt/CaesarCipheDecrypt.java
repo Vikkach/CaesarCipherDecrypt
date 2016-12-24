@@ -17,13 +17,9 @@ public class CaesarCipheDecrypt {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String str = "ABDEFGHIJKLMNOPQRSTUVWXYZ";
-        for (int i = 0; i <= str.length() - 1; i++){
-            int newE = 4 + i;
-            System.out.println(oneKeyDecrypt(str.substring(i) + str.substring(newE,newE) + str.substring(newE,newE) + str.substring(0, i)));
-        }
-
-      //  System.out.println(twoKeyDecrypt("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu"));// TODO code application logic here
+        System.out.println(oneKeyDecrypt("Vkob. Wi xomocckbsoc kbo owlkbu'n. Pkbogovv.\n" +
+"Kxn, cscdob, kc dro gsxnc qsfo loxopsd"));
+      System.out.println(twoKeyDecrypt("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu"));
     }
 
     
@@ -57,6 +53,9 @@ public class CaesarCipheDecrypt {
         int indexE = Character.getNumericValue('E');
         int indexMaxChar = Character.getNumericValue(maxChar);
         int key = (indexE - indexMaxChar);
+        if (maxChar == 'a' || maxChar == 'b' || maxChar == 'c' || maxChar == 'd'){
+            key = indexE - 26 - indexMaxChar;
+        }
         System.out.println(key);
         
         for (int i = 0; i < input.length(); i++){
@@ -143,6 +142,12 @@ public class CaesarCipheDecrypt {
         int indexMaxCharKey2 = Character.getNumericValue(maxCharKey2);
         int key1 = (indexE - indexMaxCharKey1);
         int key2 = (indexE - indexMaxCharKey2);
+        if (maxCharKey1 == 'a' || maxCharKey1 == 'b' || maxCharKey1 == 'c' || maxCharKey1 == 'd'){
+            key1 = indexE - 26 - indexMaxCharKey1;
+        }
+        if (maxCharKey2 == 'a' || maxCharKey2 == 'b' || maxCharKey2 == 'c' || maxCharKey2 == 'd'){
+            key2 = indexE - 26 - indexMaxCharKey2;
+        }
         
         for (int i = 0; i < input.length(); i++){
             char newChar = 0;
@@ -150,7 +155,10 @@ public class CaesarCipheDecrypt {
             if (i%2 == 0){
                 int oldCharIndex = Character.getNumericValue(fromInput);
                 int newCharIndex = oldCharIndex + key1;
-                if (newCharIndex > 10 && newCharIndex < 36){
+                if (newCharIndex < 10 && Character.isLetter(fromInput)){
+                    newCharIndex = 36 + (oldCharIndex - 10) + key1;
+                }
+                if (newCharIndex > 9 && newCharIndex < 36){
                     if (Character.isLowerCase(fromInput)){
                         newChar = Character.forDigit(newCharIndex, 36);
                     } if (Character.isUpperCase(fromInput)){
@@ -165,7 +173,10 @@ public class CaesarCipheDecrypt {
             if (i%2 != 0){
                 int oldCharIndex = Character.getNumericValue(fromInput);
                 int newCharIndex = oldCharIndex + key2;
-                if (newCharIndex > 10 && newCharIndex < 36){
+                if (newCharIndex < 10 && Character.isLetter(fromInput)){
+                    newCharIndex = 36 + (oldCharIndex - 10) + key2;
+                }
+                if (newCharIndex > 9 && newCharIndex < 36){
                     if (Character.isLowerCase(fromInput)){
                         newChar = Character.forDigit(newCharIndex, 36);
                     } if (Character.isUpperCase(fromInput)){
