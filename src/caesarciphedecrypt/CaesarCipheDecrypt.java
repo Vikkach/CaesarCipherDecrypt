@@ -5,6 +5,7 @@
  */
 package caesarciphedecrypt;
 
+import edu.duke.FileResource;
 import java.util.HashMap;
 
 /**
@@ -17,12 +18,23 @@ public class CaesarCipheDecrypt {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(oneKeyDecrypt("Vkob. Wi xomocckbsoc kbo owlkbu'n. Pkbogovv.\n" +
-"Kxn, cscdob, kc dro gsxnc qsfo loxopsd"));
-      System.out.println(twoKeyDecrypt("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu"));
+        testCaesarTwoKeyDecrypt();
+        //System.out.print(twoKeyDecrypt("Aal uttx hm aal Qtct Fhljha pl Wbdl. Pvxvxlx!"));
     }
 
+    public static void testCaesarOneKeyDecrypt(){
+        FileResource fr = new FileResource();
+        String message = fr.asString();
+        String decrypted = oneKeyDecrypt(message);
+        System.out.println(decrypted);
+    }
     
+    public static void testCaesarTwoKeyDecrypt(){
+        FileResource fr = new FileResource();
+        String message = fr.asString();
+        String decrypted = twoKeyDecrypt(message);
+        System.out.println(decrypted);
+    }
     public static String oneKeyDecrypt(String input){
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder replasedString = new StringBuilder(input);
@@ -136,7 +148,6 @@ public class CaesarCipheDecrypt {
                     }
                 }
         }
-        
         int indexE = Character.getNumericValue('E');
         int indexMaxCharKey1 = Character.getNumericValue(maxCharKey1);
         int indexMaxCharKey2 = Character.getNumericValue(maxCharKey2);
@@ -148,7 +159,10 @@ public class CaesarCipheDecrypt {
         if (maxCharKey2 == 'a' || maxCharKey2 == 'b' || maxCharKey2 == 'c' || maxCharKey2 == 'd'){
             key2 = indexE - 26 - indexMaxCharKey2;
         }
-        
+       // key1 = -14;
+       // key2 = -24;
+        System.out.println(key1);
+        System.out.println(key2);
         for (int i = 0; i < input.length(); i++){
             char newChar = 0;
             char fromInput = input.charAt(i);
